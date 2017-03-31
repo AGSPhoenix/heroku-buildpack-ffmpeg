@@ -14,10 +14,14 @@ echo "DOWNLOAD_URL = " $DOWNLOAD_URL | indent
 cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
-curl -L --silent $DOWNLOAD_URL | tar xJ
+wget --progress=dot -O ffmpeg-release-64bit-static.tar.xz $DOWNLOAD_URL
+
+tar xfJ ffmpeg-release-64bit-static.tar.xz
 
 echo "exporting PATH and LIBRARY_PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
 mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$PATH:$HOME/vendor/ffmpeg-release-64bit-static"' >> $PROFILE_PATH
+#                                      This mess gets the directory name
+echo 'export PATH="$PATH:$HOME/vendor/`tar tf ffmpeg-release-64bit-static.tar.xz | head -n 1 | head -c -2`"' >> $PROFILE_PATH
 #echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/vendor/ffmpeg/lib"' >> $PROFILE_PATH
+rm ffmpeg-release-64bit-static.tar.xz
