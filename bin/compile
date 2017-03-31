@@ -14,7 +14,7 @@ echo "DOWNLOAD_URL = " $DOWNLOAD_URL | indent
 cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
-wget --progress=dot -O ffmpeg-release-64bit-static.tar.xz $DOWNLOAD_URL
+wget --progress=dot:mega -O ffmpeg-release-64bit-static.tar.xz $DOWNLOAD_URL
 
 tar xfJ ffmpeg-release-64bit-static.tar.xz
 
