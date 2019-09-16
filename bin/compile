@@ -7,22 +7,22 @@ indent() {
 echo "-----> Install ffmpeg"
 BUILD_DIR=$1
 VENDOR_DIR="vendor"
-DOWNLOAD_URL="http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz" #When updating this, get the one below as well
+DOWNLOAD_URL="https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz" #When updating this, get the one below as well
 
 echo "DOWNLOAD_URL = " $DOWNLOAD_URL | indent
 
 cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
-wget --progress=dot:mega -O ffmpeg-release-64bit-static.tar.xz $DOWNLOAD_URL
+wget --progress=dot:mega -O ffmpeg-release-amd64-static.tar.xz $DOWNLOAD_URL
 
-tar xfJ ffmpeg-release-64bit-static.tar.xz
+tar xfJ ffmpeg-release-amd64-static.tar.xz
 
 echo "exporting PATH and LIBRARY_PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo -n 'export PATH="$PATH:$HOME/vendor/"' >> $PROFILE_PATH
 #     This mess gets the directory name, since it will change from time to time
-echo `tar tf ffmpeg-release-64bit-static.tar.xz | head -n 1 | head -c -2` >> $PROFILE_PATH
+echo `tar tf ffmpeg-release-amd64-static.tar.xz | head -n 1 | head -c -2` >> $PROFILE_PATH
 #echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/vendor/ffmpeg/lib"' >> $PROFILE_PATH
-rm ffmpeg-release-64bit-static.tar.xz
+rm ffmpeg-release-amd64-static.tar.xz
